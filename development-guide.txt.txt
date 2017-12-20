@@ -1,0 +1,11 @@
+Development Ideas
+-----------------
+
+1. Mock Minefield
+Start with constructing a web page that displays a mock set of minesweeper tiles.  Start with a basic minesweeper.html file then use a CSS grid to display a 5x5 minesweeper.
+
+Details here:
+https://www.w3schools.com/css/css_grid.asp
+https://commons.wikimedia.org/wiki/Category:Minesweeper
+
+
