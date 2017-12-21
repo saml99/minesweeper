@@ -20,5 +20,14 @@ Details here:
 https://www.w3schools.com/html/html_forms.asp  (basic forms using html)
 https://www.w3schools.com/html/html_form_input_types.asp (different form input types)
 
+3. Identifying your DOM Elements
+Change your javascript code to ensure each element that has been generated has a unique identifier.  You'll need this for the later steps.
 
+Details here:
+https://www.w3schools.com/tags/ref_standardattributes.asp
 
+4. Events for the minefield
+Use javascript actions to create a message box when a tile has been clicked.  The message box should display which tile was selected - ie the identifier.
+
+Details here:
+https://www.w3schools.com/js/js_htmldom_events.asp
