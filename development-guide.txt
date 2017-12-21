@@ -19,6 +19,7 @@ Create a width and height selector using html on the form.  Create a button to g
 Details here:
 https://www.w3schools.com/html/html_forms.asp  (basic forms using html)
 https://www.w3schools.com/html/html_form_input_types.asp (different form input types)
+https://www.w3schools.com/js/js_htmldom_html.asp (Using the Document Object Model to dynamically generate HTML using javascript)
 
 3. Identifying your DOM Elements
 Change your javascript code to ensure each element that has been generated has a unique identifier.  You'll need this for the later steps.
