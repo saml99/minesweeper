@@ -1,4 +1,4 @@
-alert('hello');
+
 /*function Cell(x,y,w) {
   this.x = x;
   this.y = y;
