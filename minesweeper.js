@@ -146,6 +146,36 @@ var hitPosition = function(button) {
   } else {
 
     var neighborBombs =howManyNeighborBombs(button.x, button.y);
+
+    if (neighborBombs != 0){
+
+      button.innerText = neighborBombs;
+
+      var colors =
+      [
+        'red', 'teal', 'brown', 'rebeccapurple', 'purple', 'darkgreen', 'green', 'navy'
+      ];
+
+      var idx = 0;
+
+      switch (neighborBombs) {
+        case 1: idx++;
+        case 2: idx++;
+        case 3: idx++;
+        case 4: idx++;
+        case 5: idx++;
+        case 6: idx++;
+        case 7: idx++;
+        case 8:
+
+        default:
+      }
+
+      button.style.color = colors[idx];
+    } else {
+
+      explode(button.x, button.y);
+    }
   }
 }
 
@@ -157,6 +187,12 @@ var howManyNeighborBombs = function(x, y) {
 
   return 1;
 }
+
+var explode = function(x,y) {
+
+  
+}
+
 startButton.onclick = () =>
 {
   loadBoard();
