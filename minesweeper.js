@@ -32,11 +32,11 @@ var loadBoard = function() {
 
       rowDiv.appendChild(button);
 
-      matrix[y][x] = button;
-      button.x = x;
+      matrix[y][x] = button; //assigns the button to coordinate x and y
+      button.x = x; //assigns the buttons coordinates inside the matrix so that the button can be found in the matrix
       button.y = y;
 
-      allCoordinates.push(button);
+      allCoordinates.push(button); //pushes a button into every item in the allCoordinates array
 
       button.onclick = (e) => {leftClickAction(e);}
       button.oncontextmenu = (e) => {rightClickAction(e);}
@@ -54,14 +54,14 @@ var generateBombs = function(allCoordinates) {
   var count = 0;
   while(count++ < numberOfBombs){
 
-    var idx = Math.floor(Math.random() * allCoordinates.length);
+    var idx = Math.floor(Math.random() * allCoordinates.length); //generates a random number between zero and the length of the allCoordinates array
 
-    var coordinate = allCoordinates[idx];
+    var coordinate = allCoordinates[idx]; //chooses the random coordinate
     matrix[coordinate.y][coordinate.x].bomb = true;
 
     allCoordinates.splice(idx, 1);
 
-    bombsCoordinates.push(coordinate);
+    bombsCoordinates.push(coordinate); //pushes the random coordinate into the bombsCoordinates array
   }
 }
 
@@ -137,7 +137,25 @@ var getParent = function(element, nodeName) {
 
 var hitPosition = function(button) {
 
-  alert('hit position');
+  button.onclick = null;
+  button.oncontextmenu = (e) => {e.preventDefault();};
+
+  if (button.bomb) {
+
+    gameOver(button);
+  } else {
+
+    var neighborBombs =howManyNeighborBombs(button.x, button.y);
+  }
+}
+
+var gameOver = function(button) {
+
+}
+
+var howManyNeighborBombs = function(x, y) {
+
+  return 1;
 }
 startButton.onclick = () =>
 {
