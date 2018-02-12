@@ -10,6 +10,8 @@ var bombsCoordinates = [];
 
 var startButton = document.getElementById('startButton');
 
+var isPlaying = false;
+
 var loadBoard = function() {
 
   board.innerHTML = '';
@@ -38,8 +40,8 @@ var loadBoard = function() {
 
       allCoordinates.push(button); //pushes a button into every item in the allCoordinates array
 
-      button.onclick = (e) => {leftClickAction(e);}
-      button.oncontextmenu = (e) => {rightClickAction(e);}
+      button.onclick = (e) => {guess(e);}
+      button.oncontextmenu = (e) => {layFlag(e);}
     }
     board.appendChild(rowDiv);
   }
@@ -79,7 +81,9 @@ var showBombs = function() {
   }
 }
 
-var leftClickAction = function(event) {
+var guess = function(event) {
+
+  if (!isPlaying) return;
 
   var button = getParent(event.target, 'BUTTON');
 
@@ -91,9 +95,11 @@ var leftClickAction = function(event) {
   hitPosition(button);
 }
 
-var rightClickAction = function(event) {
+var layFlag = function(event) {
 
   event.preventDefault();
+
+  if (!isPlaying) return;
 
   var target = event.target;
 
@@ -145,7 +151,7 @@ var hitPosition = function(button) {
     gameOver(button);
   } else {
 
-    var neighborBombs =howManyNeighborBombs(button.x, button.y);
+    var neighborBombs = howManyNeighborBombs(button.x, button.y);
 
     if (neighborBombs != 0){
 
@@ -156,46 +162,64 @@ var hitPosition = function(button) {
         'red', 'teal', 'brown', 'rebeccapurple', 'purple', 'darkgreen', 'green', 'navy'
       ];
 
-      var idx = 0;
-
-      switch (neighborBombs) {
-        case 1: idx++;
-        case 2: idx++;
-        case 3: idx++;
-        case 4: idx++;
-        case 5: idx++;
-        case 6: idx++;
-        case 7: idx++;
-        case 8:
-
-        default:
-      }
-
-      button.style.color = colors[idx];
+      button.style.color = colors[neighborBombs - 1];
     } else {
 
-      explode(button.x, button.y);
+      expand(button.x, button.y);
     }
+
+    button.style.background = 'rgb(153, 178, 208)';
   }
 }
 
 var gameOver = function(button) {
 
+  isPlaying = false;
+  showBombs();
+
+  button.style.background = 'red';
+  button.style.color = 'yellow';
+
+  display.innerText = 'GAME OVER';
+  display.style.color = 'red';
+  display.style.fontWeight = 'bold';
 }
 
 var howManyNeighborBombs = function(x, y) {
 
-  return 1;
+  var count = 0;
+
+  var iy = y == 0 ? y : y - 1; //checks for a y value above selected square
+  for (;iy <= y + 1 && iy < matrix.length; iy++) { //checks for y value below
+
+    var ix = x == 0 ? x : x - 1;
+    for (;ix <= x + 1 && ix < matrix[iy].length; ix++) {
+
+      if (matrix[iy][ix].bomb)
+        count++;
+    }
+  }
+
+  return count;
 }
 
-var explode = function(x,y) {
+var expand = function(x,y) {
 
-  
+  var iy = y == 0 ? y : y - 1;
+  for (;iy <= y + 1 && iy < matrix.length; iy++) {
+
+    var ix = x == 0 ? x : x - 1;
+    for (;ix <= x + 1 && ix < matrix[iy].length; ix++) {
+
+      matrix[iy][ix].click();
+    }
+  }
 }
 
 startButton.onclick = () =>
 {
   loadBoard();
+  isPlaying = true;
 }
 
 startButton.click();
