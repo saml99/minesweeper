@@ -6,3 +6,6 @@ var MinefieldView = function(model) {
 
 MinefieldView.prototype.init = function init() {
 };
+
+MinefieldView.prototype.show = function show() {
+};
